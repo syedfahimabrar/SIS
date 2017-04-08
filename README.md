@@ -1,37 +1,17 @@
-## Welcome to GitHub Pages
+# Welcome to Student Information System
 
-You can use the [editor on GitHub](https://github.com/lazyfahim/SIS/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Student information System is a System to store students data to database. And find data when needed.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Features
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+- Student can find there data themselves.
+- Admin can delete any students or added an update any students data
+- Admin can backup the data in google drive by one button click
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lazyfahim/SIS/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Needed Assistance software to run this project
+- [xampp server](https://www.apachefriends.org/download.html)
+- [Java JDK](http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-windows-x64.exe?AuthParam=1491660186_3231929cce1870c4a30fdc0343e7affe)
