@@ -37,11 +37,14 @@ public class FirstTime {
     public static boolean isfirst(){
         File file=new File("First.txt");
         try {
-            firstttimeString=Read.readFile(file);
+            firstttimeString=Read.readFile("started.txt");
+            System.err.println(firstttimeString);
             if(firstttimeString.equals("started for first time\n")){
+                file.delete();
                 return true;
             }
         } catch (Exception e) {
+            System.err.println(e);
         }
         return false;
     }
