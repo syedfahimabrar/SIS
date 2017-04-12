@@ -71,6 +71,11 @@ public class DataBase extends javax.swing.JFrame {
 
         OkButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         OkButton.setText("OK");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(OkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 150, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/books.jpg"))); // NOI18N
@@ -79,6 +84,14 @@ public class DataBase extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
+        // TODO add your handling code here:
+        String DataBaseName,InitialPassWord;
+        DataBaseName=DataBaseNamefld.getText();
+        InitialPassWord=InitialPassWordfld.getText();
+        
+    }//GEN-LAST:event_OkButtonActionPerformed
 
     /**
      * @param args the command line arguments
