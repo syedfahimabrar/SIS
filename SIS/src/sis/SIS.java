@@ -25,6 +25,8 @@
  */
 package sis;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fahim
@@ -37,7 +39,9 @@ public class SIS {
     public static void main(String[] args) {
         // TODO code application logic here
         if(FirstTime.isfirst()==true){
-            
+            DataBase dat=new DataBase();
+            JOptionPane.showMessageDialog(dat, "It's seems that you are starting this software for first time.Please Create a database first\n");
+            dat.setVisible(true);
         }
     }
     

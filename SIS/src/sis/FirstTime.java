@@ -35,7 +35,7 @@ public class FirstTime {
     public static String firstttimeString;
     
     public static boolean isfirst(){
-        File file=new File("First.txt");
+        File file=new File("started.txt");
         try {
             firstttimeString=Read.readFile("started.txt");
             System.err.println(firstttimeString);

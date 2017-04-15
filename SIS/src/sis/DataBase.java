@@ -25,6 +25,9 @@
  */
 package sis;
 
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fahim
@@ -50,8 +53,9 @@ public class DataBase extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         DataBaseNamefld = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        InitialPassWordfld = new javax.swing.JTextField();
         OkButton = new javax.swing.JButton();
+        Inipass = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +71,6 @@ public class DataBase extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(102, 0, 0));
         jLabel3.setText("Initial PassWord:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 170, 20));
-        getContentPane().add(InitialPassWordfld, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 170, 30));
 
         OkButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         OkButton.setText("OK");
@@ -77,6 +80,15 @@ public class DataBase extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 150, 50));
+        getContentPane().add(Inipass, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 170, 30));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/home.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 100, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/books.jpg"))); // NOI18N
         jLabel1.setText("OK");
@@ -89,9 +101,38 @@ public class DataBase extends javax.swing.JFrame {
         // TODO add your handling code here:
         String DataBaseName,InitialPassWord;
         DataBaseName=DataBaseNamefld.getText();
-        InitialPassWord=InitialPassWordfld.getText();
+        InitialPassWord=Inipass.getText();
+        WriteToFileExample1.write(DataBaseName);
+        String DataBaseCreate="CREATE DATABASE "+DataBaseName;
+        String CreateTable=
+                "CREATE TABLE "+DataBaseName+".Persons (\n" +
+            "    ID int NOT NULL,\n" +
+            "    FullName varchar(255) NOT NULL,\n" +
+            "    Age int NOT NULL,\n"+
+            "    Sex varchar(255),\n" +
+            "    Blood varchar(255),\n" +
+            "    MobileNumber int,\n" +
+            "    PRIMARY KEY (ID),\n" +
+            "    Image BLOB"+
+            ");";
+        try {
+            Statement st=DBcon.connect().createStatement();
+            st.executeUpdate(DataBaseCreate);
+            st.executeUpdate(CreateTable);
+            JOptionPane.showMessageDialog(null, "DataBase Created");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
         
     }//GEN-LAST:event_OkButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DashBoard dash=new DashBoard();
+        this.setVisible(false);
+        dash.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,8 +171,9 @@ public class DataBase extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DataBaseNamefld;
-    private javax.swing.JTextField InitialPassWordfld;
+    private javax.swing.JPasswordField Inipass;
     private javax.swing.JButton OkButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
