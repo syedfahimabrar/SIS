@@ -30,17 +30,31 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 
 /**
  *
  * @author fahim
  */
 public class DBcon {
+    
     public static String UserName="root";
     public static String PassWord="";
     public static String DBurl="jdbc:mysql://localhost:3306/";
     public static String JDBC_Driver="com.mysql.jdbc.Driver";
     public static Connection connect(){
+        try {
+            Class.forName(JDBC_Driver);
+            Connection con=DriverManager.getConnection(DBurl, UserName, PassWord);
+            return con;
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    public static  Connection connect(String url){
+        DBcon.DBurl="jdbc:mysql://localhost:3306/"+url;
+        JOptionPane.showMessageDialog(null, DBurl);
         try {
             Class.forName(JDBC_Driver);
             Connection con=DriverManager.getConnection(DBurl, UserName, PassWord);

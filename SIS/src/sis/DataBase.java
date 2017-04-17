@@ -27,7 +27,6 @@ package sis;
 
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author fahim

@@ -25,11 +25,28 @@
  */
 package sis;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author fahim
  */
 public class AddUserUI extends javax.swing.JFrame {
+    String PathPanel;
+    private String path;
 
     /**
      * Creates new form AddUserUI
@@ -52,7 +69,7 @@ public class AddUserUI extends javax.swing.JFrame {
 
         HomeButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        IDfld = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         Name = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -63,6 +80,11 @@ public class AddUserUI extends javax.swing.JFrame {
         blood = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         Mobile = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        Imgfld = new javax.swing.JLabel();
+        browse = new javax.swing.JButton();
+        Adduser = new javax.swing.JButton();
+        pathpanel = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,7 +103,7 @@ public class AddUserUI extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("ID:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 60, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 110, -1));
+        getContentPane().add(IDfld, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 110, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 0, 255));
@@ -117,6 +139,31 @@ public class AddUserUI extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
         getContentPane().add(Mobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, 220, -1));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 0, 255));
+        jLabel8.setText("Image:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+
+        Imgfld.setText("            No Image");
+        getContentPane().add(Imgfld, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 150, 150));
+
+        browse.setText("Browse");
+        browse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(browse, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, -1, -1));
+
+        Adduser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/addbut.png"))); // NOI18N
+        Adduser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdduserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Adduser, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 100, 100));
+        getContentPane().add(pathpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 190, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/books.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 970, 600));
 
@@ -130,8 +177,82 @@ public class AddUserUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_HomeButtonActionPerformed
 
+    private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chose = new JFileChooser();
+        String path;
+         chose.setCurrentDirectory(new File(System.getProperty("user.home")));
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg","gif","png");
+        chose.addChoosableFileFilter(filter);
+        int result=chose.showSaveDialog(null);
+        if(result==JFileChooser.APPROVE_OPTION){
+            File selectedFile=chose.getSelectedFile();
+            path=selectedFile.getAbsolutePath();
+            ImageIcon img=new ImageIcon(path);
+            Imgfld.setIcon(ResizeImage(path));
+            pathpanel.setText(path);
+            this.path=path;
+        }
+        else if(result == JFileChooser.CANCEL_OPTION){
+             JOptionPane.showMessageDialog(pathpanel, "No data!");
+         }
+        
+    }//GEN-LAST:event_browseActionPerformed
+
+    private void AdduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdduserActionPerformed
+        try {
+            String FullName,Sex,Blood,Image,DataBaseName,Insertion;
+            int ID,Age,Mobile;
+            ID=Integer.parseInt(IDfld.getText());
+            FullName=Name.getText();
+            Sex=sex.getSelectedItem().toString();
+            //JOptionPane.showMessageDialog(pathpanel, Sex);
+            Age=Integer.parseInt(this.Age.getText());
+            Blood=blood.getSelectedItem().toString();
+            Mobile=Integer.parseInt(this.Mobile.getText());
+            DataBaseName = ReadFilefromtext.readFile("DBNAME.txt");
+            String select="select * from "+DataBaseName+".persons";
+            Image=path;
+            
+            Insertion="INSERT INTO `persons` (`ID`, `FullName`, `Age`, `Sex`, `Blood`, `MobileNumber`,`Image`) VALUES (?,?,?,?,?,?,?); ";
+           
+            //String pic="INSERT INTO `persons` (`Image`) VALUES (?);";
+            try {
+                //Statement st=DBcon.connect(DataBaseName).createStatement();
+                InputStream inputStream = new FileInputStream(new File(Image));
+                File file = new File(path);
+                PreparedStatement ps=DBcon.connect(DataBaseName).prepareStatement(Insertion);
+                ps.setInt(1, ID);
+                ps.setString(2, FullName);
+                ps.setInt(3, Age);
+                ps.setString(4, Sex);
+                ps.setString(5, Blood);
+                ps.setInt(6, Mobile);
+                ps.setBinaryStream(7, inputStream, (int) file.length());
+                ps.executeUpdate();
+                
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(pathpanel,e);
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AddUserUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_AdduserActionPerformed
+
+     public ImageIcon ResizeImage(String imgPath){
+        ImageIcon MyImage = new ImageIcon(imgPath);
+        Image img = MyImage.getImage();
+        Image newImage = img.getScaledInstance(Imgfld.getWidth(), Imgfld.getHeight(),Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImage);
+        return image;
+    }
     /**
      * @param args the command line arguments
+     * 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -166,11 +287,15 @@ public class AddUserUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Adduser;
     private javax.swing.JTextField Age;
     private javax.swing.JButton HomeButton;
+    private javax.swing.JTextField IDfld;
+    private javax.swing.JLabel Imgfld;
     private javax.swing.JTextField Mobile;
     private javax.swing.JTextField Name;
     private javax.swing.JComboBox<String> blood;
+    private javax.swing.JButton browse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -178,7 +303,8 @@ public class AddUserUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField pathpanel;
     private javax.swing.JComboBox<String> sex;
     // End of variables declaration//GEN-END:variables
 }
