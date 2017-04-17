@@ -39,6 +39,9 @@ public class DataBase extends javax.swing.JFrame {
      */
     public DataBase() {
         initComponents();
+        this.setSize(920, 640);
+        this.setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**
@@ -64,13 +67,13 @@ public class DataBase extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 0));
         jLabel2.setText("DataBase Name:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 160, 40));
-        getContentPane().add(DataBaseNamefld, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 170, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 160, 40));
+        getContentPane().add(DataBaseNamefld, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 170, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 0, 0));
         jLabel3.setText("Initial PassWord:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 170, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 170, 20));
 
         OkButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         OkButton.setText("OK");
@@ -79,8 +82,8 @@ public class DataBase extends javax.swing.JFrame {
                 OkButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(OkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 150, 50));
-        getContentPane().add(Inipass, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 170, 30));
+        getContentPane().add(OkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 150, 50));
+        getContentPane().add(Inipass, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 170, 30));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/home.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,11 +91,10 @@ public class DataBase extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 100, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 100, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/books.jpg"))); // NOI18N
-        jLabel1.setText("OK");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, -70, 900, 680));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, -210, 1540, 960));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

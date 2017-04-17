@@ -25,22 +25,17 @@
  */
 package sis;
 
-import jdk.nashorn.internal.codegen.CompilerConstants;
-
 /**
  *
  * @author fahim
  */
-public class DashBoard extends javax.swing.JFrame {
+public class SearchUserUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form DashBoard
+     * Creates new form SearchUserUI
      */
-    public DashBoard() {
+    public SearchUserUI() {
         initComponents();
-        this.setSize(920, 640);
-        this.setLocationRelativeTo(null);
-        setResizable(false);
     }
 
     /**
@@ -52,49 +47,21 @@ public class DashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Add = new javax.swing.JButton();
-        Search = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/AddUser.jpg"))); // NOI18N
-        Add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 180, 180));
-
-        Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/search.png"))); // NOI18N
-        Search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 220, 190));
-
-        jLabel1.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/books.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -40, 1280, 730));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        // TODO add your handling code here:
-        AddUserUI ad=new AddUserUI();
-        this.setVisible(false);
-        ad.setVisible(true);
-    }//GEN-LAST:event_AddActionPerformed
-
-    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
-        // TODO add your handling code here:
-        SearchUserUI se=new SearchUserUI();
-        se.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_SearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,22 +79,25 @@ public class DashBoard extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SearchUserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SearchUserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SearchUserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SearchUserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashBoard().setVisible(true);
+                new SearchUserUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
-    private javax.swing.JButton Search;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,6 +43,10 @@ public class SIS {
             JOptionPane.showMessageDialog(dat, "It's seems that you are starting this software for first time.Please Create a database first\n");
             dat.setVisible(true);
         }
+        else{
+            DashBoard dash=new DashBoard();
+            dash.setVisible(true);
+        }
     }
     
 }
