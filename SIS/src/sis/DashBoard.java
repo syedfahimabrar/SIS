@@ -54,6 +54,7 @@ public class DashBoard extends javax.swing.JFrame {
 
         Add = new javax.swing.JButton();
         Search = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,7 +66,7 @@ public class DashBoard extends javax.swing.JFrame {
                 AddActionPerformed(evt);
             }
         });
-        getContentPane().add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 180, 180));
+        getContentPane().add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 180, 180));
 
         Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/search.png"))); // NOI18N
         Search.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +74,10 @@ public class DashBoard extends javax.swing.JFrame {
                 SearchActionPerformed(evt);
             }
         });
-        getContentPane().add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 220, 190));
+        getContentPane().add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 220, 190));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/Student.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 910, 120));
 
         jLabel1.setBackground(new java.awt.Color(51, 51, 51));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/books.jpg"))); // NOI18N
@@ -129,5 +133,6 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JButton Add;
     private javax.swing.JButton Search;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,6 +25,22 @@
  */
 package sis;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.chart.PieChart.Data;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fahim
@@ -53,12 +69,18 @@ public class SearchUserUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         SearchIDfld = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        Search = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Namefld = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        sex = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        Mobile = new javax.swing.JTextField();
+        Age = new javax.swing.JTextField();
+        Blood = new javax.swing.JTextField();
+        Imagefld = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,10 +93,21 @@ public class SearchUserUI extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(51, 0, 255));
         jLabel2.setText("Search by ID:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 160, 70));
+
+        SearchIDfld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchIDfldActionPerformed(evt);
+            }
+        });
         getContentPane().add(SearchIDfld, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 110, 30));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/searchbt.jpg"))); // NOI18N
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 100, 90));
+        Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/searchbt.jpg"))); // NOI18N
+        Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 100, 90));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 0, 255));
@@ -96,12 +129,67 @@ public class SearchUserUI extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(204, 204, 0));
         jLabel6.setText("Sex:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 80, 40));
+        getContentPane().add(sex, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 120, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 0, 255));
+        jLabel7.setText("Mobile Number:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, 120, 30));
+        getContentPane().add(Mobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 230, 30));
+        getContentPane().add(Age, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 100, 30));
+        getContentPane().add(Blood, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 300, 150, 30));
+
+        Imagefld.setText("              No Image");
+        getContentPane().add(Imagefld, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 150, 170));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sis/books.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1123, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
+        try {
+            // TODO add your handling code here:
+            int id;
+            String DataBaseName=ReadFilefromtext.readFile("DBNAME.txt");
+            id=Integer.parseInt(SearchIDfld.getText());
+            String sql="select * from "+DataBaseName+".persons where id ="+id+";";
+            try {
+                Statement st=DBcon.connect(DataBaseName).createStatement();
+                ResultSet rs=st.executeQuery(sql);
+                rs.next();
+                String Name=rs.getString("FullName");
+                int age=rs.getInt("Age");
+                String Sex=rs.getString("Sex");
+                String Blod=rs.getString("Blood");
+                int MobileNumber=rs.getInt("MobileNumber");
+                Blob Image=rs.getBlob("Image");
+                //InputStream binaryStream = Image.getBinaryStream(0, Image.length());
+                Namefld.setText(Name);
+                Age.setText(Integer.toString(age));
+                sex.setText(Sex);
+                Blood.setText(Blod);
+                Mobile.setText(Integer.toString(MobileNumber));
+                int blobLength = (int) Image.length();
+
+                byte[] blobAsBytes = Image.getBytes(1, blobLength);
+                final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+
+                Imagefld.setIcon(new ImageIcon(bufferedImage));
+                
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SearchUserUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SearchActionPerformed
+
+    private void SearchIDfldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchIDfldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchIDfldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,15 +227,21 @@ public class SearchUserUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Age;
+    private javax.swing.JTextField Blood;
+    private javax.swing.JLabel Imagefld;
+    private javax.swing.JTextField Mobile;
     private javax.swing.JTextField Namefld;
+    private javax.swing.JButton Search;
     private javax.swing.JTextField SearchIDfld;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField sex;
     // End of variables declaration//GEN-END:variables
 }
