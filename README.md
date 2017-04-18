@@ -2,6 +2,8 @@
 
 Student information System is a System to store students data to database. And find data when needed.
 
+## [here is a youtube video to setup this project: ](https://youtu.be/l2rMAdsVeJk)
+
 ![Alt text](https://raw.githubusercontent.com/lazyfahim/SIS/master/student.jpg "SIS")
 
 
