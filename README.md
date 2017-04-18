@@ -2,6 +2,8 @@
 
 Student information System is a System to store students data to database. And find data when needed.
 
+![Alt text](/student.jpg?raw=true "Optional Title")
+
 
 
 ### Features
