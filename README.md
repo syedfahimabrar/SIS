@@ -2,7 +2,7 @@
 
 Student information System is a System to store students data to database. And find data when needed.
 
-![Alt text](/student.jpg?raw=true "Optional Title")
+![Alt text](https://raw.githubusercontent.com/lazyfahim/SIS/master/student.jpg "SIS")
 
 
 
