@@ -9,8 +9,8 @@ Student information System is a System to store students data to database. And f
 
 
 - Student can find there data themselves.
-- Admin can delete any students or added an update any students data
-- Admin can backup the data in google drive by one button click
+- Admin can delete any student's or add an update of any students data
+- Admin can backup the data in google drive by one button click(next version)
 
 ## Needed Assistance software to run this project
 - [xampp server](https://www.apachefriends.org/download.html)
