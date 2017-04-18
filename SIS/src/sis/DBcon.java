@@ -54,7 +54,6 @@ public class DBcon {
     }
     public static  Connection connect(String url){
         DBcon.DBurl="jdbc:mysql://localhost:3306/"+url;
-        JOptionPane.showMessageDialog(null, DBurl);
         try {
             Class.forName(JDBC_Driver);
             Connection con=DriverManager.getConnection(DBurl, UserName, PassWord);
